@@ -21,9 +21,9 @@ function renderSlide(root, slide, index) {
 		if (line.startsWith('#')) {
 			// Add header
 			html = html + '<h1>' + line.substring(1) + '</h1>';
-		} else if (line.startsWith('  ') || line.startsWith('\t')) {
+		} else if (line.startsWith('`') || line.startsWith('\t')) {
 			// Add code
-			html = html + '<pre>' + line.replace(/^(  )|\t/,'') + '</pre>';
+			html = html + '<pre>' + line.replace(/`/g,'') + '</pre>';
                 } else if (line.startsWith('@')) {
                         html = html + '<img src="' + line.substring(1) + '" />';
 		} else {

@@ -4,7 +4,8 @@
   "description": "Plain text presentation maker",
   "scripts": {
     "lint": "jshint src/slide.js",
-    "build": "node build.js > slide.html"
+    "build": "node build.js > slide.html",
+    "convert": "node convert.js > test.html"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,7 @@
     "jshint": "^2.9.2",
     "uglify-js": "^2.8.29"
   },
-  "dependencies": {}
+  "dependencies": {
+    "beautify": "0.0.8"
+  }
 }
