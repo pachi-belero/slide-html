@@ -25,7 +25,11 @@ function renderSlide(root, slide, index) {
 			// Add code
 			html = html + '<pre>' + line.replace(/`/g,'') + '</pre>';
                 } else if (line.startsWith('@')) {
+                        // Add image
                         html = html + '<img src="' + line.substring(1) + '" />';
+                } else if (line.startsWith('- ')) {
+                        // Add lists
+                        html = html + '<li>' + line.substring(1) + '</li>';
 		} else {
 			// Unquote dot-quoted lines
 			if (line.startsWith('.')) {
