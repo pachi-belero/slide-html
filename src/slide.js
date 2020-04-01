@@ -24,6 +24,8 @@ function renderSlide(root, slide, index) {
 		} else if (line.startsWith('  ') || line.startsWith('\t')) {
 			// Add code
 			html = html + '<pre>' + line.replace(/^(  )|\t/,'') + '</pre>';
+                } else if (line.startsWith('@')) {
+                        html = html + '<img src="' + line.substring(1) + '" />';
 		} else {
 			// Unquote dot-quoted lines
 			if (line.startsWith('.')) {
