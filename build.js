@@ -12,5 +12,5 @@ var inline = html
   .replace(/<script src="slide.js"><\/script>/, '<script>'+uglify(js, {fromString: true}).code+'</script>')
   .replace(/<link .*href="slide.css">/, '<style>'+cssmin(css)+'</style>');
 
-fs.writeFileSync("slide.html", html);
+fs.writeFileSync("slide.html", inline);
 fs.writeFileSync("customization.css", customization);
