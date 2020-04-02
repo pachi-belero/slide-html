@@ -120,9 +120,9 @@ window.onload = function() {
 	window.onclick = next;
 	window.onresize = resize;
 	window.onkeydown = function(e) {
-		if (e.keyCode == 39) {
+		if (e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 76 || e.keyCode == 74) {
 			next();
-		} else if (e.keyCode == 37) {
+		} else if (e.keyCode == 37 || e.keyCode == 48 || e.keyCode == 72 || e.keyCode == 75) {
 			prev();
 		}
 	};
