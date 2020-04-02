@@ -4,8 +4,7 @@
   "description": "Plain text presentation maker",
   "scripts": {
     "lint": "jshint src/slide.js",
-    "build": "node build.js > slide.html",
-    "convert": "node convert.js > test.html"
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
