@@ -30,6 +30,9 @@ function renderSlide(root, slide, index) {
                 } else if (line.startsWith('- ')) {
                         // Add lists
                         html = html + '<li>' + line.substring(1) + '</li>';
+		} else if (line.startsWith('<!--') || line.startsWith('\t')) {
+			// Remove comments (they otherwise cause an extra line break)
+			continue;
 		} else {
 			// Unquote dot-quoted lines
 			if (line.startsWith('.')) {
