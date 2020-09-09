@@ -9,22 +9,27 @@ No programming knowledge is required, too.
 The original (trikita) implementation can be found [here](https://github.com/trikita/slide-html).
 Android implementation (2016) can be found [here](https://github.com/trikita/slide).
 
+The improved version that this one is based on can be found [here](https://github.com/jloow/slide-html).
+
 ## Tutorial
 
 1. Download `slide.html` and `customization.css`.
-   [Open this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/slide.html)
-   and press <kbd>Ctrl+S</kbd>. Then do the same with [this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/customization.css)
+ [Open this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/slide.html)
+ and press <kbd>Ctrl+S</kbd>. Then do the same with
+ [this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/customization.css).
 2. Open the downloaded `slide.html` with a text editor.
-3. Find the line `<pre id="slide">` (should be somewhere around line 12).
+3. Find the line `<pre id="slide">` (should be somewhere around line 16).
 4. Edit the text. This is the contents of your presentation.
-5. Edit the `customization.css` to delete the example CSS styles customizations for specific slides (lines 33 to 50), and optionally adjust color or other styles.
-6. After you save the files - open `slide.html` in your browser and see the results. You
-	 can edit, save and refresh the browser to see how your presentation looks
-	 like.
+5. Edit the `customization.css` to delete the example CSS styles customizations for
+specific slides (lines 33 to 50), and optionally adjust color or other styles.
+6. After you save the files, open `slide.html` in your browser and see the results. You
+can edit, save and refresh the browser to see how your presentation looks like.
 
 ## Demo
 
 Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/pachi-belero/slide-html/blob/master/slide.html).
+
+NOTE: the images will not work if you view the file online with the previous link, but they will on your local computer or any other HTTP server.
 
 ## Syntax
 
@@ -39,11 +44,11 @@ Emphasized text is written as bold and must be surrounded with asterisks, `*like
 
 To print an actual asterist just write it twice, `** like this`.
 
-To emphasize text or use any other special format, just use HTML tags directly.
+To emphasize text or use any other special format, just use HTML tags directly, _`<em>like in this emphasized text</em>`_.
 
-Code blocks are written with monospace font and must start with at least two spaces, tab, or backticks (on each line).
+Code blocks are written with monospace font and must start with at least two spaces, tab, or backticks (\`) (on each line).
 
-Image slides start with `@` character.
+Image slides start with `!` character.
 
 Simple lists can be created by starting lines with a dash (`-`).
 
@@ -54,9 +59,8 @@ beginning of the line.
 
 ## Styling
 
-In `customization.css` there is a small style block. You can specify the
-default font, foreground and background colors for your slides. You can also
-customize header, monospace and emphasized font styles.
+In `customization.css` there is a small style block. You can specify the default font, foreground and background colors for your slides. You can also
+customize header, monospace and emphasized font styles, and do further customizations for specific slides, to include background images, etc.
 
 ## Printing
 
@@ -72,6 +76,6 @@ standalone `slide.html` version.
 
 ## License
 
-Code is distributed under MIT license, feel free to use it. 
+Code is distributed under MIT license, feel free to use it.
 
 Made by [Trikita](http://trikita.co) - feel free to checkout our other works!
