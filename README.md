@@ -20,14 +20,19 @@ The improved version that this one is based on can be found [here](https://githu
 2. Open the downloaded `slide.html` with a text editor.
 3. Find the line `<pre id="slide">` (should be somewhere around line 16).
 4. Edit the text. This is the contents of your presentation.
-5. Edit the `customization.css` to delete the example CSS styles customizations for
-specific slides (lines 33 to 50), and optionally adjust color or other styles.
+5. Edit the `customization.css` (the style settings for your presentation) to delete the example CSS
+styles customizations for specific slides (lines 33 to 50), and optionally adjust color or other styles.
+Note that using specific slide customization makes sharing the CSS file for several HTML presentations
+impossible (you will need to place each HTML file on a different folder, or edit them to change the
+name of the CSS file used).
 6. After you save the files, open `slide.html` in your browser and see the results. You
 can edit, save and refresh the browser to see how your presentation looks like.
+7. Copy, share and/or publish BOTH files whenever needed (without the CSS file, the style will be wrong)
+and also the local image files you have used (if any).
 
 ## Demo
 
-Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/pachi-belero/slide-html/blob/master/slide.html).
+Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/pachi-belero/slide-html/blob/master/src/slide.html).
 
 NOTE: the images will not work if you view the file online with the previous link, but they will on your local computer or any other HTTP server.
 
@@ -48,7 +53,7 @@ To emphasize text or use any other special format, just use HTML tags directly, 
 
 Code blocks are written with monospace font and must start with at least two spaces, tab, or backticks (\`) (on each line).
 
-Image slides start with `!` character.
+Image slides start with `!` character. You can specify a relative path to a file, or a URL.
 
 Simple lists can be created by starting lines with a dash (`-`).
 
@@ -60,7 +65,8 @@ beginning of the line.
 ## Styling
 
 In `customization.css` there is a small style block. You can specify the default font, foreground and background colors for your slides. You can also
-customize header, monospace and emphasized font styles, and do further customizations for specific slides, to include background images, etc.
+customize header, monospace and emphasized font styles, and do further customizations for specific slides, to include background images, etc. Note that using specific slide customization makes sharing the CSS file for several HTML presentations impossible (you will need to place each HTML file on a different folder, or edit them to change the
+name of the CSS file used).
 
 ## Printing
 
