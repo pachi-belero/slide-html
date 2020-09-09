@@ -4,6 +4,7 @@
 /* NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
 var CLICK_NEXT = 0;
 var INDENT_RE = /^(?:( )+|\t+)/;
+var currentSlide = -1;
 
 function trimIndent(s) {
 	var indent = (s.match(INDENT_RE)||[''])[0].length;
@@ -103,8 +104,6 @@ function resize() {
 	var scale = ((w/h < bw/bh) ? w/bw : h/bh);
 	document.body.style.transform = 'scale(' + scale + ')';
 }
-
-var currentSlide = -1;
 
 function goTo(slideIndex) {
 	currentSlide = slideIndex;
