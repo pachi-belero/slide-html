@@ -74,6 +74,8 @@ pull request you can edit files inside the `src` folder. Then you may open
 `src/slide.html` to view your changes, or run `npm run build` to generate the
 standalone `slide.html` version.
 
+Also, you can run `npm run convert input_text_file output_slide_file.html` to generate a new HTML file from the text file specified, using `slide.html` as a template.
+
 ## License
 
 Code is distributed under MIT license, feel free to use it.
