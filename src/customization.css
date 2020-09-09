@@ -30,7 +30,7 @@
 	/* Customize initial slide: bigger title, and swapped fore and background colors for impact. */
 	.slide-0 { color: #333333; background-color: #edd400; }
 	.slide-0 h1 { color: #333333; font-size: 2.6rem; }
-	/* Customize specific slides: special colors or style, backgrounds, etc. */
+	/* Customize specific slides: special colors or style, backgrounds, etc. Needs to be adapted for each specific presentation. */
 	.slide-10 h1 { color: #f5e65e; text-shadow: 1px 1px 3px #dab200; }
 	.slide-11 h1 { text-shadow: 1px 1px 3px #453029; }
 	.slide-11 {
