@@ -1,3 +1,8 @@
+/* This file is only used during the build process; its content is inserted in the html file */
+
+/* Disable the previous advance-on-click behaviour */
+/* NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
+var CLICK_NEXT = 0;
 var INDENT_RE = /^(?:( )+|\t+)/;
 
 function trimIndent(s) {
@@ -20,16 +25,27 @@ function renderSlide(root, slide, index) {
 		var line = lines[i];
 		if (line.startsWith('#')) {
 			// Add header
-			html = html + '<h1>' + line.substring(1) + '</h1>';
-		} else if (line.startsWith('`') || line.startsWith('\t')) {
+    		if (line.startsWith('##')) {
+			    html = html + '<h2>' + line.substring(2) + '</h2>';
+            } else {
+			    html = html + '<h1>' + line.substring(1) + '</h1>';
+            }
+		} else if (line.startsWith('`') || line.startsWith('\t') || line.startsWith('  ')) {
 			// Add code
-			html = html + '<pre>' + line.replace(/`/g,'') + '</pre>';
-                } else if (line.startsWith('@')) {
-                        // Add image
-                        html = html + '<img src="' + line.substring(1) + '" />';
-                } else if (line.startsWith('- ')) {
-                        // Add lists
-                        html = html + '<li>' + line.substring(1) + '</li>';
+    		if (line.startsWith('  ')) {
+				html = html + '<pre>' + line.substring(2) + '</pre>';
+            } else {
+				html = html + '<pre>' + line.substring(1) + '</pre>';
+            }
+		} else if (line.startsWith('!')) {
+				// Add image
+				html = html + '<img src="' + line.substring(1) + '" />';
+		} else if (line.startsWith(':')) {
+			html = html + '<a href="' + line.substring(1).trim() + '" target="_blank">' + line.substring(1).trim() + '</a>';
+			html = html + '<br/>';
+		} else if (line.startsWith('- ')) {
+			// Add lists
+			html = html + '<li>' + line.substring(1) + '</li>';
 		} else if (line.startsWith('<!--') || line.startsWith('\t')) {
 			// Remove comments (they otherwise cause an extra line break)
 			continue;
@@ -120,13 +136,24 @@ window.onload = function() {
 	resize();
 	render(document.getElementById('slide').innerHTML);
 	goTo(window.location.hash.substring(1)||0);
-	window.onclick = next;
+	if (CLICK_NEXT) {
+		window.onclick = next;
+	}
 	window.onresize = resize;
 	window.onkeydown = function(e) {
-		if (e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 76 || e.keyCode == 74) {
+		// Right-arrow, down-arrow, l, j
+		// Enter, pg-down, spacebar
+		if (e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 76 || e.keyCode == 74
+				|| e.keyCode == 13 || e.keyCode == 34 || e.keyCode == 32) {
 			next();
-		} else if (e.keyCode == 37 || e.keyCode == 48 || e.keyCode == 72 || e.keyCode == 75) {
+		// Left-arrow, up-arrow, h, k
+		// Backspace, pg-up, h, k
+		} else if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 72 || e.keyCode == 75
+					|| e.keyCode == 8 || e.keyCode == 33) {
 			prev();
+		// Home, 0, numpad-0
+		} else if (e.keyCode == 36 || e.keyCode == 48 || e.keyCode == 96) {
+			goTo(0);
 		}
 	};
 };

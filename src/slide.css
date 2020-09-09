@@ -1,3 +1,4 @@
+/* This file is only used during the build process; its content is inserted in the html file */
 * {
 	margin: 0;
 	padding: 0;
@@ -27,7 +28,7 @@
 
 @media print {
 	body { transform: none !important; }
-	h1 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; font-weight: 300; }
+	h1 { font-size: 1.8rem; line-height: 1.5; letter-spacing: -.05rem; font-weight: 300; }
 	.slide-root { width: 100%; display: flex; flex-wrap: wrap; align-items: stretch; }
 	.slide-content { transform: none !important; }
 	.slide {

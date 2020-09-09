@@ -3,99 +3,123 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Slide</title>
+    <title>Slide-HTML</title>
+    <!-- NOTE: the next line will be replaced by build.js with the contents of src/slide.css -->
     <link rel="stylesheet" href="slide.css">
     <link rel="stylesheet" href="customization.css">
+    <!-- NOTE: the next line will be replaced by build.js with the contents of src/slide.js -->
     <script src="slide.js"></script>
-  </head>
+    <style media="screen">@import url(https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext);@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);@import url(https://fonts.googleapis.com/css?family=Inconsolata);</style>
+ </head>
   <body class="slide-16x9">
     <pre id="slide">
-      #SLIDE
+      #SLIDE-HTML
       Good speech deserves time it takes
       Save time for speech
-      Leave presentation to *Slide*
+      Focus on content
+      Leave presentation to Slide-HTML
+   
+      # Format
+      ## Headlines and sub-headlines with # and ##
+      Emphasize words by surrounding them with ***asterisks***
+      .
+      Start lines with colons (:) to create a link like this:
+      : https://www.wikipedia.org
+      .
+      - Create lists like this
+      - by starting each line with a dash (-)
 
-      The next slide is an image test
-
-      @test.jpg
-
-      #Focus on content
-      Learn 5 markup rules
-      to make content look great
-
-      # #1
-      Each paragraph is a slide
-
-      # #2
-      Headers start with #
-
-      # #3
-      Emphasize *words*
-      surrounding them with **asterisks**
-
-      # #4
-      Indent code with 2 spaces
-        /* Day of week: Sakamoto's algorithm */
-        int dow(int y, int m, int d)
-        {
-          static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-          y -= m < 3;
-          return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
+      # Code
+      Indent code with 2 spaces, tab or backtick (`)
+      .
+      	/* Day of week: Sakamoto's algorithm */
+      `int dow(int y, int m, int d)
+      `{
+      `   static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+      `   y -= m < 3;
+      `   return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
         }
 
-      # #5
-      Lines starting with a dot
+      # Images
+      The next slides are some image tests
+
+      <!-- NOTE: this is slide #5 -->
+      !img/test.png
+
+      # Four images and text
+      NOTE: Images make text appear small
+      .
+      !img/test.png
+      !img/test.png
+      .
+      !img/test.png
+      !img/test.png
+
+      # Escape
+      Lines starting with a dot (.)
       disable markup such as
       headlines, code or blank lines
 
       ↵  = new slide
-      .# = headline
-      ** = emphasize
-      ␣␣ = monospace
+      .# = headline (## for sub-headline or h2)
+      ** = emphasize (bold or strong)
+      ␣␣ = monospace (code)
       .. = escape
+      .: = link
+      .! = image
+
+      # Other HTML
+      Use any other HTML tags directly, such as:
+      `&lt;a href="slide.html"&gt;Link&lt;/a&gt;
+      .<a href="slide.html" target="_blank">Link</a>
+      `&lt;em&gt;Emphasis&lt;/em&gt;
+      .<em>Emphasis</em>
 
       # Styling with CSS
-
-      # Selectors
-      ..slide
-      ..slide h1
-      ..slide strong
-      ..slide pre
-      .
-      ..slide-N, where N is slide number
+      ## Selectors for all slides
+        .slide
+        .slide h1
+        .slide strong
+        .slide pre
+      ## Selectors for specific slides only:
+        .slide-N, where N is slide number
 
       # Example
+      <!-- NOTE: this is slide #10, and uses customized css -->
       .
         .slide-10 h1 {
-          color: #fff;
-          text-shadow: 1px 1px 3px #453029;
+          color: #f5e65e; text-shadow: 1px 1px 3px #dab200;
         }
       .
-
+      
+      <!-- NOTE: this is slide #11, and uses customized css -->
       # CSS backgrounds
-        .slide-12 {
-          background: url("icon.png"),
-                      url("bg.png");
+        .slide-11 {
+          color: #333333;
+          background: url("img/test.png"), url("img/background.png");
           background-repeat: no-repeat, repeat;
-          background-size: 40%, auto;
+          background-size: 25%, auto;
           background-position: bottom right;
         }
-
-
+      
       # Print mode
       You can print slide thumbnails
       to practice your speech
-
-      Slide for Android
-      .
-      .
-      .
-
+      
       # Links
-      http://trikita.co/slide
-      https://github.com/trikita/slide
-      https://github.com/trikita/slide-html
-      https://play.google.com/store/apps/details?id=trikita.slide
+      : https://github.com/trikita/slide-html
+      : https://github.com/pachi-belero/slide-html
+      
+      <!-- NOTE: this is slide #14, and uses customized css -->
+      # Examples in Android app
+      NOTE: images from trikita.co site.
+      : https://github.com/trikita/slide
+      .
+      .
+      .
+      .
+      .
+      .
     </pre>
   </body>
 </html>

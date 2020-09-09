@@ -1,4 +1,4 @@
-# Slide
+# Slide-HTML
 
 The most simple plain text presentation maker.
 
@@ -6,23 +6,25 @@ This version is a standalone HTML page of 4K in size that you can edit in place
 and get a working presentation. No other tools needed except for a text editor.
 No programming knowledge is required, too.
 
-Android implementation can be found [here](https://github.com/trikita/slide).
+The original (trikita) implementation can be found [here](https://github.com/trikita/slide-html).
+Android implementation (2016) can be found [here](https://github.com/trikita/slide).
 
 ## Tutorial
 
-1. Download `slide.html`.
-   [Open this link](https://raw.githubusercontent.com/trikita/slide-html/master/slide.html)
-   and press <kbd>Ctrl+S</kbd>.
+1. Download `slide.html` and `customization.css`.
+   [Open this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/slide.html)
+   and press <kbd>Ctrl+S</kbd>. Then do the same with [this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/customization.css)
 2. Open the downloaded `slide.html` with a text editor.
-3. Find the line `<pre id="slide">` (should be somewhere around line 36).
+3. Find the line `<pre id="slide">` (should be somewhere around line 12).
 4. Edit the text. This is the contents of your presentation.
-5. After you save the file - open it in your browser and see the results. You
+5. Edit the `customization.css` to delete the example CSS styles customizations for specific slides (lines 33 to 50), and optionally adjust color or other styles.
+6. After you save the files - open `slide.html` in your browser and see the results. You
 	 can edit, save and refresh the browser to see how your presentation looks
 	 like.
 
 ## Demo
 
-Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/trikita/slide-html/blob/master/slide.html).
+Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/pachi-belero/slide-html/blob/master/slide.html).
 
 ## Syntax
 
@@ -31,20 +33,28 @@ Slides are separated with a blank line.
 The font size of each slide is scaled automatically to fit the screen. This is
 suitable for [Takahashi method](https://en.wikipedia.org/wiki/Takahashi_method).
 
-Headlines use a larger font size and start with `#` sign.
+Headlines use a larger font size and start with `#` sign. `##` creates second-level headlines.
 
 Emphasized text is written as bold and must be surrounded with asterisks, `*like this*`.
 
 To print an actual asterist just write it twice, `** like this`.
 
-Code blocks are written with monospace font and must start with at least two spaces.
+To emphasize text or use any other special format, just use HTML tags directly.
 
-To disable the special meaning of newlines, spaces or `#` put a dot at the
+Code blocks are written with monospace font and must start with at least two spaces, tab, or backticks (on each line).
+
+Image slides start with `@` character.
+
+Simple lists can be created by starting lines with a dash (`-`).
+
+Lines that contain just a URL and must be converted to a link start with `:` character.
+
+To disable the special meaning of newlines, spaces, `:`, `#`, etc. put a dot at the
 beginning of the line.
 
 ## Styling
 
-Above the slide contents there is a small style block. You can specify the
+In `customization.css` there is a small style block. You can specify the
 default font, foreground and background colors for your slides. You can also
 customize header, monospace and emphasized font styles.
 
