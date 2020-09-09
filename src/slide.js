@@ -139,6 +139,14 @@ window.onload = function() {
 		window.onclick = next;
 	}
 	window.onresize = resize;
+	// Mouse wheel (scroll) events
+	window.onwheel = function(e) {
+		if (e.deltaY > 0) {
+			next();
+		} else {
+			prev();
+		}
+	};
 	window.onkeydown = function(e) {
 		// Right-arrow, down-arrow, l, j
 		// Enter, pg-down, spacebar
@@ -150,8 +158,8 @@ window.onload = function() {
 		} else if (e.keyCode == 37 || e.keyCode == 38 || e.keyCode == 72 || e.keyCode == 75
 					|| e.keyCode == 8 || e.keyCode == 33) {
 			prev();
-		// Home, 0, numpad-0
-		} else if (e.keyCode == 36 || e.keyCode == 48 || e.keyCode == 96) {
+		// Home
+		} else if (e.keyCode == 36) {
 			goTo(0);
 		}
 	};
