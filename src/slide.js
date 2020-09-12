@@ -46,7 +46,7 @@ function renderSlide(root, slide, index) {
 			html = html + '<br/>';
 		} else if (line.startsWith('- ')) {
 			// Add lists
-			html = html + '<li>' + line.substring(1) + '</li>';
+			html = html + '<ul><li>' + line.substring(1) + '</li></ul>';
 		} else if (line.startsWith('<!--')) {
 			// Remove comments (they otherwise cause an extra line break)
 			continue;
@@ -106,7 +106,6 @@ function resize() {
 }
 
 function goTo(slideIndex) {
-	currentSlide = slideIndex;
 	window.location.hash = slideIndex;
 	var slides = document.querySelectorAll('.slide');
 	for (var i = 0; i < slides.length; i++) {
@@ -114,13 +113,14 @@ function goTo(slideIndex) {
 		var slide = el.children[0];
 		var scaleWidth = (el.offsetWidth * 0.8 / slide.offsetWidth);
 		var scaleHeight = (el.offsetHeight * 0.8 / slide.offsetHeight);
-		slide.style.transform = 'scale(' + Math.min(scaleWidth, scaleHeight) + ')';
-		if (i == currentSlide) {
+		if (i == slideIndex) {
+			slide.style.transform = 'scale(' + Math.min(scaleWidth, scaleHeight) + ')';
 			el.style.visibility = '';
-		} else {
+		} else if (i == currentSlide) {
 			el.style.visibility = 'hidden';
 		}
 	}
+	currentSlide = slideIndex;
 }
 
 function next() {
@@ -131,17 +131,22 @@ function prev() {
 	goTo(Math.max(currentSlide - 1, 0));
 }
 
+function current() {
+	goTo(currentSlide);
+}
+
 window.onload = function() {
 	resize();
 	render(document.getElementById('slide').innerHTML);
-	goTo(window.location.hash.substring(1)||0);
+	currentSlide = Number(window.location.hash.substring(1))||0;
+	window.setTimeout(current, 200);
 	if (CLICK_NEXT) {
 		window.onclick = next;
 	}
 	window.onresize = resize;
 	// Mouse wheel (scroll) events
 	window.onwheel = function(e) {
-		if (!window.event.ctrlKey && !window.event.metaKey) {
+		if (!window.event.ctrlKey && !window.event.metaKey && !window.event.altKey) {
 			if (e.deltaY > 0) {
 				next();
 			} else {
@@ -150,6 +155,9 @@ window.onload = function() {
 		}
 	};
 	window.onkeydown = function(e) {
+		if (window.event.ctrlKey || window.event.metaKey || window.event.altKey) {
+			return;
+		}
 		// Right-arrow, down-arrow, l, j
 		// Enter, pg-down, spacebar
 		if (e.keyCode == 39 || e.keyCode == 40 || e.keyCode == 76 || e.keyCode == 74
