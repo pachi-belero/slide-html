@@ -15,7 +15,7 @@ The improved version that this one is based on can be found [here](https://githu
 
 1. Download `slide.html` and `customization.css`.
  [Open this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/slide.html)
- and press <kbd>Ctrl+S</kbd>. Then do the same with
+ and press <kbd>Ctrl+S</kbd>, then do the same with
  [this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/customization.css).
 2. Open the downloaded `slide.html` with a text editor.
 3. Find the line `<pre id="slide">` (should be somewhere around line 16).
@@ -26,10 +26,10 @@ Note that using specific slide customization makes sharing the `customization.cs
 HTML presentations impossible (in that case, it is better to use a *`samefilename.html.css`* file
 (same name as the HTML file, which will also be read and used; you can keep the "common" settings
 in the `customization.css`).
-6. After you save the files, open `slide.html` in your browser and see the results. You
-can edit, save and refresh the browser to see how your presentation looks like.
-7. Copy, share and/or publish BOTH the HTML and CSS files whenever needed.
-and also the local image files you have used (if any).
+6. After you save the files, open `slide.html` in your browser and see the results. You can edit,
+save and refresh the browser to see how your presentation looks like.
+7. Copy, share and/or publish BOTH the HTML and CSS files whenever needed, and also the local image
+files you have used (if any).
 8. Optionally, you can place a `favicon.ico` file too (in the same folder) and it will be used.
 
 ## Demo
