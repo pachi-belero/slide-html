@@ -9,8 +9,8 @@ var currentSlide = -1;
 function trimIndent(s) {
 	var indent = (s.match(INDENT_RE)||[''])[0].length;
 	if (indent > 0) {
-		var trim = s.substring(0, indent);
-		return s.replace(new RegExp(trim, 'g'), '');
+		var trim = '^' + s.substring(0, indent);
+		return s.replace(new RegExp(trim, 'gm'), '');
 	}
 }
 
@@ -26,18 +26,18 @@ function renderSlide(root, slide, index) {
 		var line = lines[i];
 		if (line.startsWith('#')) {
 			// Add header
-    		if (line.startsWith('##')) {
-			    html = html + '<h2>' + line.substring(2) + '</h2>';
-            } else {
-			    html = html + '<h1>' + line.substring(1) + '</h1>';
-            }
+			if (line.startsWith('##')) {
+				html = html + '<h2>' + line.substring(2) + '</h2>';
+			} else {
+				html = html + '<h1>' + line.substring(1) + '</h1>';
+			}
 		} else if (line.startsWith('`') || line.startsWith('\t') || line.startsWith('  ')) {
 			// Add code
-    		if (line.startsWith('  ')) {
+			if (line.startsWith('  ')) {
 				html = html + '<pre>' + line.substring(2) + '</pre>';
-            } else {
+			} else {
 				html = html + '<pre>' + line.substring(1) + '</pre>';
-            }
+			}
 		} else if (line.startsWith('!')) {
 				// Add image
 				html = html + '<img src="' + line.substring(1) + '" />';
@@ -47,7 +47,7 @@ function renderSlide(root, slide, index) {
 		} else if (line.startsWith('- ')) {
 			// Add lists
 			html = html + '<li>' + line.substring(1) + '</li>';
-		} else if (line.startsWith('<!--') || line.startsWith('\t')) {
+		} else if (line.startsWith('<!--')) {
 			// Remove comments (they otherwise cause an extra line break)
 			continue;
 		} else {
@@ -141,10 +141,12 @@ window.onload = function() {
 	window.onresize = resize;
 	// Mouse wheel (scroll) events
 	window.onwheel = function(e) {
-		if (e.deltaY > 0) {
-			next();
-		} else {
-			prev();
+		if (!window.event.ctrlKey && !window.event.metaKey) {
+			if (e.deltaY > 0) {
+				next();
+			} else {
+				prev();
+			}
 		}
 	};
 	window.onkeydown = function(e) {

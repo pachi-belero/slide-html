@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Slide-HTML</title>
+    <link rel="icon" type="image/png" href="favicon.ico" sizes="any">
     <!-- NOTE: the next line will be (or has been) replaced by the contents of src/slide.css -->
     <link rel="stylesheet" href="slide.css">
+    <!-- NOTE: the next line will load the specific CSS file samefilename.html.css -->
+    <script>var scrname = window.location.pathname.split('/').pop(); document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", "<link rel=\"stylesheet\" href=\"" + scrname + ".css\"/>");</script>
+    <!-- NOTE: the next line will load the CSS file customization.css (just this or the previous one is enough) -->
     <link rel="stylesheet" href="customization.css">
     <!-- NOTE: the next line will be (or has been) replaced by the contents of src/slide.js -->
     <script src="slide.js"></script>
     <style media="screen">@import url(https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext);@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);@import url(https://fonts.googleapis.com/css?family=Inconsolata);</style>
- </head>
+  </head>
   <body class="slide-16x9">
     <pre id="slide">
       #SLIDE-HTML
@@ -18,7 +22,7 @@
       Save time for speech
       Focus on content
       Leave presentation to Slide-HTML
-   
+
       # Format
       ## Headlines and sub-headlines with # and ##
       Emphasize words by surrounding them with ***asterisks***
@@ -32,12 +36,12 @@
       # Code
       Indent code with 2 spaces, tab or backtick (`)
       .
-      	/* Day of week: Sakamoto's algorithm */
-      `int dow(int y, int m, int d)
-      `{
-      `   static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
-      `   y -= m < 3;
-      `   return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
+        /* Day of week: Sakamoto's algorithm */
+        int dow(int y, int m, int d)
+        {
+          static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+          y -= m < 3;
+          return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
         }
 
       # Images
@@ -70,10 +74,10 @@
 
       # Other HTML
       Use any other HTML tags directly, such as:
-      `&lt;a href="slide.html"&gt;Link&lt;/a&gt;
-      .<a href="slide.html" target="_blank">Link</a>
-      `&lt;em&gt;Emphasis&lt;/em&gt;
-      .<em>Emphasis</em>
+        &lt;a href="slide.html"&gt;Link&lt;/a&gt;
+      <a href="slide.html" target="_blank">Link</a>
+        &lt;em&gt;Emphasis&lt;/em&gt;
+      <em>Emphasis</em>
 
       # Styling with CSS
       ## Selectors for all slides
@@ -91,7 +95,7 @@
           color: #f5e65e; text-shadow: 1px 1px 3px #dab200;
         }
       .
-      
+
       <!-- NOTE: this is slide #11, and uses customized css -->
       # CSS backgrounds
         .slide-11 {
@@ -101,15 +105,15 @@
           background-size: 25%, auto;
           background-position: bottom right;
         }
-      
+
       # Print mode
       You can print slide thumbnails
       to practice your speech
-      
+
       # Links
       : https://github.com/trikita/slide-html
       : https://github.com/pachi-belero/slide-html
-      
+
       <!-- NOTE: this is slide #14, and uses customized css -->
       # Examples in Android app
       NOTE: images from trikita.co site.
