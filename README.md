@@ -2,7 +2,7 @@
 
 The most simple plain text presentation maker.
 
-This version is a standalone HTML page of 4K in size that you can edit in place
+This version is a standalone HTML page of 5KB in size that you can edit in place
 and get a working presentation. No other tools needed except for a text editor.
 No programming knowledge is required, too.
 
@@ -21,20 +21,23 @@ The improved version that this one is based on can be found [here](https://githu
 3. Find the line `<pre id="slide">` (should be somewhere around line 16).
 4. Edit the text. This is the contents of your presentation.
 5. Edit the `customization.css` (the style settings for your presentation) to delete the example CSS
-styles customizations for specific slides (lines 33 to 50), and optionally adjust color or other styles.
-Note that using specific slide customization makes sharing the CSS file for several HTML presentations
-impossible (you will need to place each HTML file on a different folder, or edit them to change the
-name of the CSS file used).
+styles customizations for specific slides (lines 33 to 50), and optionally adjust colors, etc.
+Note that using specific slide customization makes sharing the `customization.css` file for several
+HTML presentations impossible (in that case, it is better to use a *`samefilename.html.css`* file
+(same name as the HTML file, which will also be read and used; you can keep the "common" settings
+in the `customization.css`).
 6. After you save the files, open `slide.html` in your browser and see the results. You
 can edit, save and refresh the browser to see how your presentation looks like.
-7. Copy, share and/or publish BOTH files whenever needed (without the CSS file, the style will be wrong)
+7. Copy, share and/or publish BOTH the HTML and CSS files whenever needed.
 and also the local image files you have used (if any).
+8. Optionally, you can place a `favicon.ico` file too (in the same folder) and it will be used.
 
 ## Demo
 
 Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/pachi-belero/slide-html/blob/master/src/slide.html).
 
-NOTE: the images will not work if you view the file online with the previous link, but they will on your local computer or any other HTTP server.
+NOTE: the images will not work if you view the file online with the previous link, but they will on
+your local computer or any other HTTP server.
 
 ## Syntax
 
@@ -51,7 +54,8 @@ To print an actual asterist just write it twice, `** like this`.
 
 To emphasize text or use any other special format, just use HTML tags directly, _`<em>like in this emphasized text</em>`_.
 
-Code blocks are written with monospace font and must start with at least two spaces, tab, or backticks (\`) (on each line).
+Code blocks are written with monospace font and must start with at least two spaces, tab, or
+backticks (\`) (on each line).
 
 Image slides start with `!` character. You can specify a relative path to a file, or a URL.
 
@@ -59,14 +63,14 @@ Simple lists can be created by starting lines with a dash (`-`).
 
 Lines that contain just a URL and must be converted to a link start with `:` character.
 
-To disable the special meaning of newlines, spaces, `:`, `#`, etc. put a dot at the
+To disable the special meaning of newlines, spaces, `:`, `!`, `-`, `#`, etc. put a dot at the
 beginning of the line.
 
 ## Styling
 
-In `customization.css` there is a small style block. You can specify the default font, foreground and background colors for your slides. You can also
-customize header, monospace and emphasized font styles, and do further customizations for specific slides, to include background images, etc. Note that using specific slide customization makes sharing the CSS file for several HTML presentations impossible (you will need to place each HTML file on a different folder, or edit them to change the
-name of the CSS file used).
+In the CSS file(s) you can specify the default font, foreground and background colors for your
+slides. You can also customize header, monospace and emphasized font styles, and do further
+customizations for specific slides, to include background images, etc. (see example).
 
 ## Printing
 
@@ -80,7 +84,8 @@ pull request you can edit files inside the `src` folder. Then you may open
 `src/slide.html` to view your changes, or run `npm run build` to generate the
 standalone `slide.html` version.
 
-Also, you can run `npm run convert input_text_file output_slide_file.html` to generate a new HTML file from the text file specified, using `slide.html` as a template.
+Also, you can run `npm run convert input_text_file output_slide_file.html` to generate a new
+HTML file from the text file specified, using `slide.html` as a template.
 
 ## License
 
