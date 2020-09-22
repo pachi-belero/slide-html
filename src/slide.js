@@ -3,8 +3,8 @@
 /* Disable the previous advance-on-click behaviour */
 /* NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
 var CLICK_NEXT = 0;
-var INDENT_RE = /^(?:( )+|\t+)/;
 var currentSlide = -1;
+var INDENT_RE = /^(?:( )+|\t+)/;
 
 function trimIndent(s) {
 	// The first ocurrence (in <pre id="slide">) of a set of spaces or tabs (at the beginning of a line) is the indent expected everywhere
