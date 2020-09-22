@@ -7,10 +7,13 @@ var INDENT_RE = /^(?:( )+|\t+)/;
 var currentSlide = -1;
 
 function trimIndent(s) {
+	// The first ocurrence (in <pre id="slide">) of a set of spaces or tabs (at the beginning of a line) is the indent expected everywhere
 	var indent = (s.match(INDENT_RE)||[''])[0].length;
 	if (indent > 0) {
 		var trim = '^' + s.substring(0, indent);
-		return s.replace(new RegExp(trim, 'gm'), '');
+		return s.replace(new RegExp(trim, 'mg'), '');
+	} else {
+		return s;
 	}
 }
 
@@ -27,26 +30,35 @@ function renderSlide(root, slide, index) {
 		if (line.startsWith('#')) {
 			// Add header
 			if (line.startsWith('##')) {
-				html = html + '<h2>' + line.substring(2) + '</h2>';
+				html = html + '<h2>' + line.substring(2).trim() + '</h2>';
 			} else {
-				html = html + '<h1>' + line.substring(1) + '</h1>';
+				html = html + '<h1>' + line.substring(1).trim() + '</h1>';
 			}
 		} else if (line.startsWith('`') || line.startsWith('\t') || line.startsWith('  ')) {
 			// Add code
+			var subs;
 			if (line.startsWith('  ')) {
-				html = html + '<pre>' + line.substring(2) + '</pre>';
+				subs = line.substring(2);
 			} else {
-				html = html + '<pre>' + line.substring(1) + '</pre>';
+				subs = line.substring(1);
 			}
+			if (subs.length == 0) {
+				// Ensure at least one space inside the <pre> element
+				subs = ' ';
+			}
+			html = html + '<pre>' + subs + '</pre>';
+		} else if (line.startsWith('@NOSELECT@')) {
+				// Disable text selection in this slide
+				slideWrapper.className += ' noselect';
 		} else if (line.startsWith('!')) {
 				// Add image
-				html = html + '<img src="' + line.substring(1) + '" />';
+				html = html + '<img src="' + line.substring(1).trim() + '" />';
 		} else if (line.startsWith(':')) {
 			html = html + '<a href="' + line.substring(1).trim() + '" target="_blank">' + line.substring(1).trim() + '</a>';
 			html = html + '<br/>';
 		} else if (line.startsWith('- ')) {
 			// Add lists
-			html = html + '<ul><li>' + line.substring(1) + '</li></ul>';
+			html = html + '<ul><li>' + line.substring(1).trim() + '</li></ul>';
 		} else if (line.startsWith('<!--')) {
 			// Remove comments (they otherwise cause an extra line break)
 			continue;
@@ -55,6 +67,7 @@ function renderSlide(root, slide, index) {
 			if (line.startsWith('.')) {
 				line = line.substring(1);
 			}
+			line = line.trim();
 			// Handle emphasis
 			for (var j = 0; j < line.length; j++) {
 				var c = line.charAt(j);
@@ -88,7 +101,8 @@ function render(content) {
 	root.className = 'slide-root';
 	document.body.appendChild(root);
 	content = trimIndent(content);
-	var slides = content.split(/[\s+]\n/mg);
+	// A new slide begins with a completely empty line, or one with just the expected indent (not more or less)
+	var slides = content.split(new RegExp('^\n', 'mg'));
 	for (var i = 0; i < slides.length; i++) {
 		var slide = slides[i].trim();
 		renderSlide(root, slide, i);
@@ -108,11 +122,13 @@ function resize() {
 function goTo(slideIndex) {
 	window.location.hash = slideIndex;
 	var slides = document.querySelectorAll('.slide');
+	// Make zoom level affect the slides size
+	var scalef = Math.round(window.devicePixelRatio) / 10.0 + 0.6;
 	for (var i = 0; i < slides.length; i++) {
 		var el = slides[i];
 		var slide = el.children[0];
-		var scaleWidth = (el.offsetWidth * 0.8 / slide.offsetWidth);
-		var scaleHeight = (el.offsetHeight * 0.8 / slide.offsetHeight);
+		var scaleWidth = (el.offsetWidth * scalef / slide.offsetWidth);
+		var scaleHeight = (el.offsetHeight * scalef / slide.offsetHeight);
 		if (i == slideIndex) {
 			slide.style.transform = 'scale(' + Math.min(scaleWidth, scaleHeight) + ')';
 			el.style.visibility = '';

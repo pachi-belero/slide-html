@@ -18,18 +18,40 @@
 	}
 	.slide h1 {
 		font-family: 'Oswald', sans-serif;
-		font-weight: 400;
+		font-weight: 400;  /* 400 = normal */
 		font-size: 1.8rem;
 		color: #edd400;
 	}
-	.slide pre {
+	.slide pre, .slide samp {
 		font-family: 'Inconsolata', monospace;
 		font-size: 0.6rem;
 		line-height: 1.1;
 	}
+	/* samp elements are similar to code/pre, but often used to present program output  */
+	.slide samp {
+		font-style: italic;
+		color: #edd400;
+	}
+	/* Optional: samp elements are preceded by a special symbol  */
+	/* .slide samp::before {
+		content: "⇨ ";
+	} */
+	.noselect { /* Disable text selection: https://stackoverflow.com/questions/16805684/javascript-disable-text-select/16805743 */
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+	ul {
+		margin-left:1em;
+	}
 	/* Customize initial slide: bigger title, and swapped fore and background colors for impact. */
 	.slide-0 { color: #333333; background-color: #edd400; }
 	.slide-0 h1 { color: #333333; font-size: 2.6rem; }
+	.slide-0 h2 { color: #333333; }
+	.slide-0 a { color: #333333; text-shadow: 0px 0px 5px #949494; }
 	/* Customize specific slides: special colors or style, backgrounds, etc. Needs to be adapted for each specific presentation. */
 	.slide-10 h1 { color: #f5e65e; text-shadow: 1px 1px 3px #dab200; }
 	.slide-11 h1 { text-shadow: 1px 1px 3px #453029; }

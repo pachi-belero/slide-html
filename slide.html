@@ -6,14 +6,14 @@
     <title>Slide-HTML</title>
     <link rel="icon" type="image/png" href="favicon.ico" sizes="any">
     <!-- NOTE: the next line will be (or has been) replaced by the contents of src/slide.css -->
-    <style>*{margin:0;padding:0;box-sizing:border-box}#slide{display:none}.slide{white-space:nowrap}.slide-content{align-self:center}@media screen{body{position:absolute;top:50%;left:50%}.slide-4x3{width:1024px;height:768px;margin:-384px 0 0 -512px}.slide-16x9{width:1024px;height:576px;margin:-288px 0 0 -512px}.slide-16x10{width:1024px;height:640px;margin:-320px 0 0 -512px}.slide{position:absolute;width:100%;height:100%;display:flex;justify-content:center;overflow:hidden}}@media print{body{transform:none!important}h1{font-size:1.8rem;line-height:1.5;letter-spacing:-.05rem;font-weight:300}.slide-root{width:100%;display:flex;flex-wrap:wrap;align-items:stretch}.slide-content{transform:none!important}.slide{display:flex;justify-content:center;flex:1;padding:.5rem;margin:.5rem .5rem 4rem .5rem;border:1px solid rgba(0,0,0,0.2);visibility:visible!important}}</style>
+    <style>*{margin:0;padding:0;box-sizing:border-box}#slide{display:none}.slide{white-space:nowrap}.slide-content{align-self:center}@media screen{body{position:absolute;top:50%;left:50%}.slide-3x2{width:1020px;height:680px;margin:-340px 0 0 -510px}.slide-4x3{width:1024px;height:768px;margin:-384px 0 0 -512px}.slide-16x9{width:1024px;height:576px;margin:-288px 0 0 -512px}.slide-16x10{width:1024px;height:640px;margin:-320px 0 0 -512px}.slide{position:absolute;width:100%;height:100%;display:flex;justify-content:center;overflow:hidden}}@media print{body{transform:none!important}h1{font-size:1.8rem;line-height:1.5;letter-spacing:-.05rem;font-weight:300}.slide-root{width:100%;display:flex;flex-wrap:wrap;align-items:stretch}.slide-content{transform:none!important}.slide{display:flex;justify-content:center;flex:1;padding:.5rem;margin:.5rem .5rem 4rem .5rem;border:1px solid rgba(0,0,0,.2);visibility:visible!important}}</style>
     <!-- NOTE: the next line will load the specific CSS file samefilename.html.css -->
     <script>var scrname = window.location.pathname.split('/').pop(); document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeend", "<link rel=\"stylesheet\" href=\"" + scrname + ".css\"/>");</script>
     <!-- NOTE: the next line will load the CSS file customization.css (just this or the previous one is enough) -->
     <link rel="stylesheet" href="customization.css">
     <!-- NOTE: the next line will be (or has been) replaced by the contents of src/slide.js -->
     <!-- NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... -->
-    <script>var CLICK_NEXT=0,INDENT_RE=/^(?:( )+|\t+)/,currentSlide=-1;function trimIndent(e){var t=(e.match(INDENT_RE)||[""])[0].length;if(t>0){var n="^"+e.substring(0,t);return e.replace(new RegExp(n,"gm"),"")}}function renderSlide(e,t,n){var i=t.split("\n"),r=-1,o=document.createElement("div"),s=document.createElement("div"),d="";o.className="slide slide-"+n,s.className="slide-content";for(var l=0;l<i.length;l++){var a=i[l];if(a.startsWith("#"))d=a.startsWith("##")?d+"<h2>"+a.substring(2)+"</h2>":d+"<h1>"+a.substring(1)+"</h1>";else if(a.startsWith("`")||a.startsWith("\t")||a.startsWith("  "))d=a.startsWith("  ")?d+"<pre>"+a.substring(2)+"</pre>":d+"<pre>"+a.substring(1)+"</pre>";else if(a.startsWith("!"))d=d+'<img src="'+a.substring(1)+'" />';else if(a.startsWith(":"))d=d+'<a href="'+a.substring(1).trim()+'" target="_blank">'+a.substring(1).trim()+"</a>",d+="<br/>";else if(a.startsWith("- "))d=d+"<ul><li>"+a.substring(1)+"</li></ul>";else{if(a.startsWith("\x3c!--"))continue;a.startsWith(".")&&(a=a.substring(1));for(var c=0;c<a.length;c++){var u=a.charAt(c);"*"==u?-1==r?r=(d+="<strong>").length:(r!=d.length?d+="</strong>":d=d.substring(0,d.length-8)+"*",r=-1):d+=u}d+="<br/>"}}s.innerHTML=d,o.appendChild(s),e.appendChild(o),o.style.visibility="hidden"}function render(e){var t=document.createElement("div");t.className="slide-root",document.body.appendChild(t);for(var n=(e=trimIndent(e)).split(/[\s+]\n/gm),i=0;i<n.length;i++){renderSlide(t,n[i].trim(),i)}return t}function resize(){var e=window.innerWidth,t=window.innerHeight,n=document.body.offsetWidth,i=document.body.offsetHeight,r=e/t<n/i?e/n:t/i;document.body.style.transform="scale("+r+")"}function goTo(e){window.location.hash=e;for(var t=document.querySelectorAll(".slide"),n=0;n<t.length;n++){var i=t[n],r=i.children[0],o=.8*i.offsetWidth/r.offsetWidth,s=.8*i.offsetHeight/r.offsetHeight;n==e?(r.style.transform="scale("+Math.min(o,s)+")",i.style.visibility=""):n==currentSlide&&(i.style.visibility="hidden")}currentSlide=e}function next(){goTo(Math.min(currentSlide+1,document.querySelectorAll(".slide").length-1))}function prev(){goTo(Math.max(currentSlide-1,0))}function current(){goTo(currentSlide)}window.onload=function(){resize(),render(document.getElementById("slide").innerHTML),currentSlide=Number(window.location.hash.substring(1))||0,window.setTimeout(current,200),CLICK_NEXT&&(window.onclick=next),window.onresize=resize,window.onwheel=function(e){window.event.ctrlKey||window.event.metaKey||window.event.altKey||(e.deltaY>0?next():prev())},window.onkeydown=function(e){window.event.ctrlKey||window.event.metaKey||window.event.altKey||(39==e.keyCode||40==e.keyCode||76==e.keyCode||74==e.keyCode||13==e.keyCode||34==e.keyCode||32==e.keyCode?next():37==e.keyCode||38==e.keyCode||72==e.keyCode||75==e.keyCode||8==e.keyCode||33==e.keyCode?prev():36==e.keyCode&&goTo(0))}};</script>
+    <scriptvar CLICK_NEXT=0,INDENT_RE=/^(?:( )+|\t+)/,currentSlide=-1;function trimIndent(e){var t=(e.match(INDENT_RE)||[""])[0].length;if(t>0){var n="^"+e.substring(0,t);return e.replace(new RegExp(n,"mg"),"")}return e}function renderSlide(e,t,n){var i=t.split("\n"),r=-1,o=document.createElement("div"),s=document.createElement("div"),d="";o.className="slide slide-"+n,s.className="slide-content";for(var l=0;l<i.length;l++){var a=i[l];if(a.startsWith("#"))d=a.startsWith("##")?d+"<h2>"+a.substring(2).trim()+"</h2>":d+"<h1>"+a.substring(1).trim()+"</h1>";else if(a.startsWith("`")||a.startsWith("\t")||a.startsWith("  ")){var c;0==(c=a.startsWith("  ")?a.substring(2):a.substring(1)).length&&(c=" "),d=d+"<pre>"+c+"</pre>"}else if(a.startsWith("@NOSELECT@"))o.className+=" noselect";else if(a.startsWith("!"))d=d+'<img src="'+a.substring(1).trim()+'" />';else if(a.startsWith(":"))d=d+'<a href="'+a.substring(1).trim()+'" target="_blank">'+a.substring(1).trim()+"</a>",d+="<br/>";else if(a.startsWith("- "))d=d+"<ul><li>"+a.substring(1).trim()+"</li></ul>";else{if(a.startsWith("\x3c!--"))continue;a.startsWith(".")&&(a=a.substring(1)),a=a.trim();for(var u=0;u<a.length;u++){var h=a.charAt(u);"*"==h?-1==r?r=(d+="<strong>").length:(r!=d.length?d+="</strong>":d=d.substring(0,d.length-8)+"*",r=-1):d+=h}d+="<br/>"}}s.innerHTML=d,o.appendChild(s),e.appendChild(o),o.style.visibility="hidden"}function render(e){var t=document.createElement("div");t.className="slide-root",document.body.appendChild(t);for(var n=(e=trimIndent(e)).split(new RegExp("^\n","mg")),i=0;i<n.length;i++){renderSlide(t,n[i].trim(),i)}return t}function resize(){var e=window.innerWidth,t=window.innerHeight,n=document.body.offsetWidth,i=document.body.offsetHeight,r=e/t<n/i?e/n:t/i;document.body.style.transform="scale("+r+")"}function goTo(e){window.location.hash=e;for(var t=document.querySelectorAll(".slide"),n=Math.round(window.devicePixelRatio)/10+.6,i=0;i<t.length;i++){var r=t[i],o=r.children[0],s=r.offsetWidth*n/o.offsetWidth,d=r.offsetHeight*n/o.offsetHeight;i==e?(o.style.transform="scale("+Math.min(s,d)+")",r.style.visibility=""):i==currentSlide&&(r.style.visibility="hidden")}currentSlide=e}function next(){goTo(Math.min(currentSlide+1,document.querySelectorAll(".slide").length-1))}function prev(){goTo(Math.max(currentSlide-1,0))}function current(){goTo(currentSlide)}window.onload=function(){resize(),render(document.getElementById("slide").innerHTML),currentSlide=Number(window.location.hash.substring(1))||0,window.setTimeout(current,200),CLICK_NEXT&&(window.onclick=next),window.onresize=resize,window.onwheel=function(e){window.event.ctrlKey||window.event.metaKey||window.event.altKey||(e.deltaY>0?next():prev())},window.onkeydown=function(e){window.event.ctrlKey||window.event.metaKey||window.event.altKey||(39==e.keyCode||40==e.keyCode||76==e.keyCode||74==e.keyCode||13==e.keyCode||34==e.keyCode||32==e.keyCode?next():37==e.keyCode||38==e.keyCode||72==e.keyCode||75==e.keyCode||8==e.keyCode||33==e.keyCode?prev():36==e.keyCode&&goTo(0))}};</script>
     <style media="screen">@import url(https://fonts.googleapis.com/css?family=Lato:400,700&subset=latin,latin-ext);@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);@import url(https://fonts.googleapis.com/css?family=Inconsolata);</style>
   </head>
   <body class="slide-16x9">
@@ -22,7 +22,9 @@
       Good speech deserves time it takes
       Save time for speech
       Focus on content
-      Leave presentation to Slide-HTML
+      Leave presentation to *Slide-HTML*
+      <!-- The next line makes this slide's text non-selectable -->
+      @NOSELECT@
 
       # Format
       ## Headlines and sub-headlines with # and ##
@@ -36,14 +38,17 @@
 
       # Code
       Indent code with 2 spaces, tab or backtick (`)
-      .
         /* Day of week: Sakamoto's algorithm */
         int dow(int y, int m, int d)
         {
           static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
           y -= m < 3;
+          
           return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
         }
+      Also, the HTML tag *&lt;samp>* can be used
+      for program "output" (similar to code)
+      <samp>Hello world!</samp>
 
       # Images
       The next slides are some image tests
@@ -79,6 +84,7 @@
       <a href="slide.html" target="_blank">Link</a>
         &lt;em&gt;Emphasis&lt;/em&gt;
       <em>Emphasis</em>
+      <!-- <dialog open>This is an open dialog window</dialog> -->
 
       # Styling with CSS
       ## Selectors for all slides
@@ -86,14 +92,15 @@
         .slide h1
         .slide strong
         .slide pre
-      ## Selectors for specific slides only:
+      ## Selectors for specific slides only
         .slide-N, where N is slide number
 
       # Example
       <!-- NOTE: this is slide #10, and uses customized css -->
       .
         .slide-10 h1 {
-          color: #f5e65e; text-shadow: 1px 1px 3px #dab200;
+          color: #f5e65e;
+          text-shadow: 1px 1px 3px #dab200;
         }
       .
 

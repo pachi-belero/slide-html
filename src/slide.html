@@ -21,7 +21,9 @@
       Good speech deserves time it takes
       Save time for speech
       Focus on content
-      Leave presentation to Slide-HTML
+      Leave presentation to *Slide-HTML*
+      <!-- The next line makes this slide's text non-selectable -->
+      @NOSELECT@
 
       # Format
       ## Headlines and sub-headlines with # and ##
@@ -35,14 +37,17 @@
 
       # Code
       Indent code with 2 spaces, tab or backtick (`)
-      .
         /* Day of week: Sakamoto's algorithm */
         int dow(int y, int m, int d)
         {
           static int t[] = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
           y -= m < 3;
+          
           return (y + y/4 - y/100 + y/400 + t[m-1] + d) % 7;
         }
+      Also, the HTML tag *&lt;samp>* can be used
+      for program "output" (similar to code)
+      <samp>Hello world!</samp>
 
       # Images
       The next slides are some image tests
@@ -78,6 +83,7 @@
       <a href="slide.html" target="_blank">Link</a>
         &lt;em&gt;Emphasis&lt;/em&gt;
       <em>Emphasis</em>
+      <!-- <dialog open>This is an open dialog window</dialog> -->
 
       # Styling with CSS
       ## Selectors for all slides
@@ -85,14 +91,15 @@
         .slide h1
         .slide strong
         .slide pre
-      ## Selectors for specific slides only:
+      ## Selectors for specific slides only
         .slide-N, where N is slide number
 
       # Example
       <!-- NOTE: this is slide #10, and uses customized css -->
       .
         .slide-10 h1 {
-          color: #f5e65e; text-shadow: 1px 1px 3px #dab200;
+          color: #f5e65e;
+          text-shadow: 1px 1px 3px #dab200;
         }
       .
 
