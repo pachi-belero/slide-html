@@ -70,7 +70,7 @@ beginning of the line.
 
 In the CSS file(s) you can specify the default font, foreground and background colors for your
 slides. You can also customize header, monospace and emphasized font styles, and do further
-customizations for specific slides, to include background images, etc. (see example).
+customizations for specific slides, to include background images, etc. (see demo).
 
 Also, some special "marks" can be used to alter a specific slide stile:
 
