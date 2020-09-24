@@ -72,6 +72,14 @@ In the CSS file(s) you can specify the default font, foreground and background c
 slides. You can also customize header, monospace and emphasized font styles, and do further
 customizations for specific slides, to include background images, etc. (see example).
 
+Also, some special "marks" can be used to alter a specific slide stile:
+
+- `@NOSELECT@` to disable text/content selecting
+- `@NOSCALE@` to not auto-scale the slide acording to content (can be useful for iframes or other special HTML or embedded content)
+- `@ZOOM@` **followed by** space(s) and an **integer** (in the range 25 to 400), to alter the slide's relative scaling. Note that the "zoom factor" applied here is not direclty visible in the final result, i.e. 200 makes content a bit bigger but not double-sized. Experiment to get suitable values (this should behave similarly to a browser's zoom level)
+
+They should appear as-is (uppercase), at the beginning of a line, one per line, and with no other content (they will be filtered out from the final content rendered).
+
 ## Printing
 
 You can print your presentation, in this case the slides will be printed as small thumbnails
