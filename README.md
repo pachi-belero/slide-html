@@ -50,7 +50,7 @@ Headlines use a larger font size and start with `#` sign. `##` creates second-le
 
 Emphasized text is written as bold and must be surrounded with asterisks, `*like this*`.
 
-To print an actual asterist just write it twice, `** like this`.
+To print an actual asterisk just write it twice, `** like this`.
 
 To emphasize text or use any other special format, just use HTML tags directly, _`<em>like in this emphasized text</em>`_.
 
@@ -61,10 +61,10 @@ Image slides start with `!` character. You can specify a relative path to a file
 
 Simple lists can be created by starting lines with a dash (`-`).
 
-Lines that contain just a URL and must be converted to a link start with `:` character.
+Lines that contain just a URL and must be converted to a link start with a colon (`:`).
 
-To disable the special meaning of newlines, spaces, `:`, `!`, `-`, `#`, etc. put a dot at the
-beginning of the line.
+**Escaping**: to disable the special meaning of newlines, spaces for code blocks, `:`, `!`, `-`, `#`, `##`,
+or special styling marks (see next section), just put a dot (`.`) at the beginning of the line.
 
 ## Styling
 
@@ -78,7 +78,7 @@ Also, some special "marks" can be used to alter a specific slide stile:
 - `@NOSCALE@` to not auto-scale the slide acording to content (can be useful for iframes or other special HTML or embedded content)
 - `@ZOOM@` **followed by** space(s) and an **integer** (in the range 25 to 400), to alter the slide's relative scaling. Note that the "zoom factor" applied here is not direclty visible in the final result, i.e. 200 makes content a bit bigger but not double-sized. Experiment to get suitable values (this should behave similarly to a browser's zoom level)
 
-They should appear as-is (uppercase), at the beginning of a line, one per line, and with no other content (they will be filtered out from the final content rendered).
+They should appear as-is (uppercase), at the beginning of a line, one mark per line, and with no other content (those lines will be filtered out in the final slide rendered), at any position in the slide (recommended: at the end).
 
 ## Printing
 
