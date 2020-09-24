@@ -3,7 +3,7 @@
 /* Disable the previous advance-on-click behaviour */
 /* NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
 var CLICK_NEXT = 0;
-var currentSlide = -1;
+var currentSlide = 0;
 var INDENT_RE = /^(?:( )+|\t+)/;
 
 function trimIndent(s) {
@@ -130,8 +130,8 @@ function resize() {
 
 function goTo(slideIndex) {
 	if (slideIndex >= 0) {
-			window.location.hash = slideIndex;
-			var slides = document.querySelectorAll('.slide');
+		window.location.hash = slideIndex;
+		var slides = document.querySelectorAll('.slide');
 		for (var i = 0; i < slides.length; i++) {
             var zoomf = 1.0;
 			var el = slides[i];
