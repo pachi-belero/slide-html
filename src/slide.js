@@ -50,6 +50,14 @@ function renderSlide(root, slide, index) {
 		} else if (line.startsWith('@NOSELECT@')) {
 				// Disable text selection in this slide
 				slideWrapper.className += ' noselect';
+		} else if (line.startsWith('@NOSCALE@')) {
+				// Disable text selection in this slide
+				slideWrapper.className += ' noscale';
+				slideContent.className = 'slide-content-noscale';
+		} else if (line.startsWith('@ZOOM@')) {
+				var zoomf = line.substring(6).trim();
+				// Disable text selection in this slide
+				slideWrapper.className += ' zoom-' + zoomf;
 		} else if (line.startsWith('!')) {
 				// Add image
 				html = html + '<img src="' + line.substring(1).trim() + '" />';
@@ -117,26 +125,44 @@ function resize() {
 	var bh = document.body.offsetHeight;
 	var scale = ((w/h < bw/bh) ? w/bw : h/bh);
 	document.body.style.transform = 'scale(' + scale + ')';
+	current();
 }
 
 function goTo(slideIndex) {
-	window.location.hash = slideIndex;
-	var slides = document.querySelectorAll('.slide');
-	// Make zoom level affect the slides size
-	var scalef = Math.round(window.devicePixelRatio) / 10.0 + 0.6;
-	for (var i = 0; i < slides.length; i++) {
-		var el = slides[i];
-		var slide = el.children[0];
-		var scaleWidth = (el.offsetWidth * scalef / slide.offsetWidth);
-		var scaleHeight = (el.offsetHeight * scalef / slide.offsetHeight);
-		if (i == slideIndex) {
-			slide.style.transform = 'scale(' + Math.min(scaleWidth, scaleHeight) + ')';
-			el.style.visibility = '';
-		} else if (i == currentSlide) {
-			el.style.visibility = 'hidden';
+	if (slideIndex >= 0) {
+			window.location.hash = slideIndex;
+			var slides = document.querySelectorAll('.slide');
+		for (var i = 0; i < slides.length; i++) {
+            var zoomf = 1.0;
+			var el = slides[i];
+            var slideContent = el.children[0];
+            // Make zoom level affect the slides size (0.8 = 80% is the default)
+            var newscalef = (window.devicePixelRatio / 10.0 ) + 0.6;
+            if (el.className.match("noscale")) {
+                newscalef = 1.0;
+            }
+            var scaleWidth = (el.offsetWidth * newscalef / slideContent.offsetWidth);
+            var scaleHeight = (el.offsetHeight * newscalef / slideContent.offsetHeight);
+            if (el.className.match("zoom-")) {
+                var zoomstr = el.className.match("zoom-.\+")[0].split();
+                var zoomint = parseInt(zoomstr[0].substr(5))||100;
+                zoomf *= zoomint / 100.0;
+                if (zoomf < 0.25) {
+                    zoomf = 0.25;
+                } else if (zoomf > 4.0) {
+                    zoomf = 4.0;
+                }
+            }
+            zoomf *= Math.min(scaleWidth, scaleHeight);
+			if (i == slideIndex) {
+                slideContent.style.transform = 'scale(' + zoomf + ')';
+				el.style.visibility = '';
+			} else {
+				el.style.visibility = 'hidden';
+			}
 		}
+		currentSlide = slideIndex;
 	}
-	currentSlide = slideIndex;
 }
 
 function next() {
@@ -148,14 +174,21 @@ function prev() {
 }
 
 function current() {
-	goTo(currentSlide);
+	dest = currentSlide;
+	max = document.querySelectorAll('.slide').length - 1;
+	goTo(Math.min(max, Math.max(dest, 0)));
+}
+
+function newhash() {
+	dest = Number(window.location.hash.substring(1))||0;
+	max = document.querySelectorAll('.slide').length - 1;
+	goTo(Math.min(max, Math.max(dest, 0)));
 }
 
 window.onload = function() {
+	currentSlide = Number(window.location.hash.substring(1))||0;
 	resize();
 	render(document.getElementById('slide').innerHTML);
-	currentSlide = Number(window.location.hash.substring(1))||0;
-	window.setTimeout(current, 200);
 	if (CLICK_NEXT) {
 		window.onclick = next;
 	}
@@ -189,4 +222,6 @@ window.onload = function() {
 			goTo(0);
 		}
 	};
+	window.onhashchange = newhash; 
+	window.setTimeout(current, 150);
 };
