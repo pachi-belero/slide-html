@@ -3,7 +3,10 @@
 /* Disable the previous advance-on-click behaviour */
 /* NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
 var CLICK_NEXT = 0;
-var currentSlide = 0;
+/* NOTE: change below to HISTORY=0 to avoid pushing browser history elements for each page change! */
+var HISTORY = 1;
+var slideNames = {};
+var currentSlide = -1;
 var INDENT_RE = /^(?:( )+|\t+)/;
 
 function trimIndent(s) {
@@ -58,12 +61,21 @@ function renderSlide(root, slide, index) {
 				var zoomf = line.substring(6).trim();
 				// Disable text selection in this slide
 				slideWrapper.className += ' zoom-' + zoomf;
+		} else if (line.startsWith('@CLASS@')) {
+				var classNm = line.substring(7).trim();
+				slideWrapper.className += ' ' + classNm;
+				slideNames[classNm] = index;
 		} else if (line.startsWith('!')) {
 				// Add image
 				html = html + '<img src="' + line.substring(1).trim() + '" />';
 		} else if (line.startsWith(':')) {
-			html = html + '<a href="' + line.substring(1).trim() + '" target="_blank">' + line.substring(1).trim() + '</a>';
-			html = html + '<br/>';
+			var url = line.substring(1).trim();
+			var target = 'target="_blank"';
+			// If it is a relative link to this presentation, open it in the same tab, otherwise in a new tan
+			if (url.startsWith('#'))
+				target = "";
+			html = html + '<a href="' + url + '" ' + target + '>' + url + '</a>';
+			html = html + '<br>';
 		} else if (line.startsWith('- ')) {
 			// Add lists
 			html = html + '<ul><li>' + line.substring(1).trim() + '</li></ul>';
@@ -71,11 +83,17 @@ function renderSlide(root, slide, index) {
 			// Remove comments (they otherwise cause an extra line break)
 			continue;
 		} else {
+			var br = true;
 			// Unquote dot-quoted lines
 			if (line.startsWith('.')) {
 				line = line.substring(1);
 			}
 			line = line.trim();
+			// Do not add a line break if the line ends with the special mark "/NOBR/"
+			if ( line.substring(line.length - 6, line.length) == "/NOBR/" ) {
+				br = false;
+				line = line.substring(0, line.length - 6);
+			}
 			// Handle emphasis
 			for (var j = 0; j < line.length; j++) {
 				var c = line.charAt(j);
@@ -95,13 +113,20 @@ function renderSlide(root, slide, index) {
 					html = html + c;
 				}
 			}
-			html = html + '<br/>';
+			if ( br == false ||
+				 line.substring(line.length - 13, line.length) == "</blockquote>" ||
+				 line.substring(line.length - 6, line.length) == "</pre>" ) {
+				// No extra line break
+				html = html + '<!-- nobr -->';
+			} else {
+				html = html + '<br>';
+			}
 		}
 	}
 	slideContent.innerHTML = html;
+	slideWrapper.style.visibility = "hidden";
 	slideWrapper.appendChild(slideContent);
 	root.appendChild(slideWrapper);
-	slideWrapper.style.visibility = "hidden";
 }
 
 function render(content) {
@@ -110,7 +135,7 @@ function render(content) {
 	document.body.appendChild(root);
 	content = trimIndent(content);
 	// A new slide begins with a completely empty line, or one with just the expected indent (not more or less)
-	var slides = content.split(new RegExp('^\n', 'mg'));
+	var slides = content.split(new RegExp('^\n+', 'mg'));
 	for (var i = 0; i < slides.length; i++) {
 		var slide = slides[i].trim();
 		renderSlide(root, slide, i);
@@ -129,39 +154,45 @@ function resize() {
 }
 
 function goTo(slideIndex) {
-	if (slideIndex >= 0) {
-		window.location.hash = slideIndex;
-		var slides = document.querySelectorAll('.slide');
-		for (var i = 0; i < slides.length; i++) {
-            var zoomf = 1.0;
-			var el = slides[i];
-            var slideContent = el.children[0];
-            // Make zoom level affect the slides size (0.8 = 80% is the default)
-            var newscalef = (window.devicePixelRatio / 10.0 ) + 0.6;
-            if (el.className.match("noscale")) {
-                newscalef = 1.0;
-            }
-            var scaleWidth = (el.offsetWidth * newscalef / slideContent.offsetWidth);
-            var scaleHeight = (el.offsetHeight * newscalef / slideContent.offsetHeight);
-            if (el.className.match("zoom-")) {
-                var zoomstr = el.className.match("zoom-.\+")[0].split();
-                var zoomint = parseInt(zoomstr[0].substr(5))||100;
-                zoomf *= zoomint / 100.0;
-                if (zoomf < 0.25) {
-                    zoomf = 0.25;
-                } else if (zoomf > 4.0) {
-                    zoomf = 4.0;
-                }
-            }
-            zoomf *= Math.min(scaleWidth, scaleHeight);
-			if (i == slideIndex) {
-                slideContent.style.transform = 'scale(' + zoomf + ')';
-				el.style.visibility = '';
-			} else {
-				el.style.visibility = 'hidden';
-			}
+	if (currentSlide >= 0) {
+		if ( HISTORY == 1 ) {
+			window.location.hash = slideIndex;  // affects browser history
+		} else {
+			window.location.hash.replace(slideIndex);  // does not affect browser history
 		}
 		currentSlide = slideIndex;
+	}
+	var slides = document.querySelectorAll('.slide');
+	for (var i = 0; i < slides.length; i++) {
+		var zoomf = 1.0;
+		var el = slides[i];
+		var slideContent = el.children[0];
+		// Make zoom level affect the slides size (0.8 = 80% is the default)
+		var newscalef = (window.devicePixelRatio / 10.0 ) + 0.6;
+		if (el.className.match("noscale")) {
+			newscalef = 1.0;
+		}
+		var scaleWidth = (el.offsetWidth * newscalef / slideContent.offsetWidth);
+		var scaleHeight = (el.offsetHeight * newscalef / slideContent.offsetHeight);
+		if (el.className.match("zoom-")) {
+			var zoomstr = el.className.match("zoom-.\+")[0].split();
+			var zoomint = parseInt(zoomstr[0].substr(5))||100;
+			zoomf *= zoomint / 100.0;
+			if (zoomf < 0.25) {
+				zoomf = 0.25;
+			} else if (zoomf > 4.0) {
+				zoomf = 4.0;
+			}
+		}
+		zoomf *= Math.min(scaleWidth, scaleHeight);
+		if (i == slideIndex) {
+			slideContent.style.transform = 'scale(' + zoomf + ')';
+			if (currentSlide >= 0) {
+				el.style.visibility = '';
+			}
+		} else {
+			el.style.visibility = 'hidden';
+		}
 	}
 }
 
@@ -179,16 +210,27 @@ function current() {
 	goTo(Math.min(max, Math.max(dest, 0)));
 }
 
+function readhash() {
+	dest = window.location.hash.substring(1)||"0";
+	if (slideNames[dest] != undefined) {
+		dest = slideNames[dest];
+	}
+	return dest;
+}
+
 function newhash() {
-	dest = Number(window.location.hash.substring(1))||0;
-	max = document.querySelectorAll('.slide').length - 1;
-	goTo(Math.min(max, Math.max(dest, 0)));
+	if (currentSlide != -1) {
+		dest = readhash();
+		max = document.querySelectorAll('.slide').length - 1;
+		goTo(Math.min(max, Math.max(dest, 0)));
+	}
 }
 
 window.onload = function() {
-	currentSlide = Number(window.location.hash.substring(1))||0;
-	resize();
 	render(document.getElementById('slide').innerHTML);
+	var initialSlide = readhash();
+	resize();  // Includes a call to current() which does not change visibility the first time
+	currentSlide = initialSlide;
 	if (CLICK_NEXT) {
 		window.onclick = next;
 	}
@@ -220,8 +262,12 @@ window.onload = function() {
 		// Home
 		} else if (e.keyCode == 36) {
 			goTo(0);
+		// Esc
+		} else if (e.keyCode == 27) {
+			// Show current slide # in hash (address bar), and put it in browser history
+			window.location.hash = currentSlide;
 		}
 	};
-	window.onhashchange = newhash; 
+	window.onhashchange = newhash;
 	window.setTimeout(current, 150);
 };

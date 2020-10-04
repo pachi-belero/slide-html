@@ -24,16 +24,23 @@
       Leave presentation to *Slide-HTML*
       <!-- The next line makes this slide's text non-selectable -->
       @NOSELECT@
+      @CLASS@ maintitle
+
 
       # Format
       ## Headlines and sub-headlines with # and ##
       Emphasize words by surrounding them with ***asterisks***
-      .
-      Start lines with colons (:) to create a link like this:
+      <!-- The next line makes use of "/NOBR" to concatenate it with the following one -->
+      Start lines with colons (:) to /NOBR/
+      create a link like this:
       : https://www.wikipedia.org
-      .
-      - Create lists like this
+      Note: internal/relative links can be used too:
+      : #format
+      - Create bullet lists like this one
       - by starting each line with a dash (-)
+      <!-- The next line makes this slide's name "format", usable in CSS and URL/links -->
+      @CLASS@ format
+
 
       # Code
       Indent code with 2 spaces, tab or backtick (`)
@@ -49,6 +56,7 @@
       for program "output" (similar to code)
       <samp>Hello world!</samp>
 
+
       # Images
       The next slides are some image tests
 
@@ -63,6 +71,7 @@
       .
       !img/test.png
       !img/test.png
+      @ZOOM@ 125
 
       # Escape
       Lines starting with a dot (.)
@@ -95,23 +104,23 @@
         .slide-N, where N is slide number
 
       # Example
-      <!-- NOTE: this is slide #10, and uses customized css -->
-      .
+      <!-- NOTE: this is slide #10, and uses customized css BY NUMBER! -->
         .slide-10 h1 {
           color: #f5e65e;
           text-shadow: 1px 1px 3px #dab200;
         }
-      .
 
-      <!-- NOTE: this is slide #11, and uses customized css -->
+      <!-- NOTE: this is slide #11, and uses customized css via its "class name" -->
       # CSS backgrounds
-        .slide-11 {
+        /* Note that we can use slide "class names" instead of numbers */
+        .slide.<u><strong>css-backgrounds</strong></u> {
           color: #333333;
           background: url("img/test.png"), url("img/background.png");
           background-repeat: no-repeat, repeat;
           background-size: 25%, auto;
           background-position: bottom right;
         }
+      @CLASS@ css-backgrounds
 
       # Print mode
       You can print slide thumbnails
@@ -121,7 +130,7 @@
       : https://github.com/trikita/slide-html
       : https://github.com/pachi-belero/slide-html
 
-      <!-- NOTE: this is slide #14, and uses customized css -->
+      <!-- NOTE: this is slide #14, and uses customized css via its "class name" -->
       # Examples in Android app
       NOTE: images from trikita.co site.
       : https://github.com/trikita/slide
@@ -131,6 +140,7 @@
       .
       .
       .
+      @CLASS@ android
     </pre>
   </body>
 </html>
