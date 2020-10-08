@@ -28,6 +28,7 @@
 
 @media print {
 	body { transform: none !important; }
+	img { transform: none !important; min-width: 200px; width: 100%; display: flex; }
 	h1 { font-size: 1.8rem; line-height: 1.5; letter-spacing: -.05rem; font-weight: 300; }
 	.slide-root { width: 100%; display: flex; flex-wrap: wrap; align-items: stretch; }
 	.slide-content { transform: none !important; }
