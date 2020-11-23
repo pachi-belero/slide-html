@@ -7,6 +7,7 @@ var CLICK_NEXT = 0;
 var HISTORY = 1;
 var slideNames = {};
 var currentSlide = -1;
+var onSearch = false;
 var INDENT_RE = /^(?:( )+|\t+)/;
 
 function trimIndent(s) {
@@ -67,7 +68,7 @@ function renderSlide(root, slide, index) {
 				slideNames[classNm] = index;
 		} else if (line.startsWith('!')) {
 				// Add image
-				html = html + '<img src="' + line.substring(1).trim() + '" />';
+				html = html + '<img src="' + line.substring(1).trim() + '" style="max-width: 100%"/>';
 		} else if (line.startsWith(':')) {
 			var url = line.substring(1).trim();
 			var target = 'target="_blank"';
@@ -169,7 +170,7 @@ function goTo(slideIndex) {
 		var slideContent = el.children[0];
 		// Make zoom level affect the slides size (0.8 = 80% is the default)
 		var newscalef = (window.devicePixelRatio / 10.0 ) + 0.6;
-		if (el.className.match("noscale")) {
+		if (el.className.match("noscale") || onSearch) {
 			newscalef = 1.0;
 		}
 		var scaleWidth = (el.offsetWidth * newscalef / slideContent.offsetWidth);
@@ -185,14 +186,14 @@ function goTo(slideIndex) {
 			}
 		}
 		zoomf *= Math.min(scaleWidth, scaleHeight);
-		if (i == slideIndex) {
-			slideContent.style.transform = 'scale(' + zoomf + ')';
-			if (currentSlide >= 0) {
-				el.style.visibility = '';
+			if (i == slideIndex || onSearch) {
+				slideContent.style.transform = 'scale(' + zoomf + ')';
+				if (currentSlide >= 0) {
+					el.style.visibility = '';
+				}
+			} else if (!onSearch) {
+				el.style.visibility = 'hidden';
 			}
-		} else {
-			el.style.visibility = 'hidden';
-		}
 	}
 }
 
@@ -237,7 +238,7 @@ window.onload = function() {
 	window.onresize = resize;
 	// Mouse wheel (scroll) events
 	window.onwheel = function(e) {
-		if (!window.event.ctrlKey && !window.event.metaKey && !window.event.altKey) {
+		if (!onSearch && !window.event.ctrlKey && !window.event.metaKey && !window.event.altKey) {
 			if (e.deltaY > 0) {
 				next();
 			} else {
@@ -246,7 +247,29 @@ window.onload = function() {
 		}
 	};
 	window.onkeydown = function(e) {
-		if (window.event.ctrlKey || window.event.metaKey || window.event.altKey) {
+		if (onSearch || window.event.ctrlKey || window.event.metaKey || window.event.altKey) {
+			if ((window.event.ctrlKey && e.keyCode == 70) ||
+				(window.event.metaKey && e.keyCode == 70)) {  // CTRL-F or META-F
+				document.body.style.transform = 'none';
+				var slides = document.querySelectorAll('.slide');
+				for (var i = 0; i < slides.length; i++) {
+					var el = slides[i];
+					var slideContent = el.children[0];
+					el.style.position = 'initial';
+					el.style.overflow = 'hidden';
+					el.style.display = 'flex';
+					el.style.maxWidth = '100%';
+					slideContent.style.padding = '1rem';
+					if (i > 0) {
+						slideContent.style.border = 'dotted';
+					}
+					el.style.visibility = 'visible';
+				}
+				onSearch = true;
+				resize();
+				window.setTimeout(resize, 150);
+			}
+			// Ignore all other keys in this case (avoid page changes in search mode)
 			return;
 		}
 		// Right-arrow, down-arrow, l, j

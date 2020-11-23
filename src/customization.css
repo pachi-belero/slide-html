@@ -1,41 +1,73 @@
 /* This file is intended to be modified and must be copied along with the main html file */
-@media screen {
+@media screen, print {
 	/* Customize theme: change body, h1, strong, pre or .slide class */
+	/* .color-text { color: #eeeeee; } */
+	/* .color-text-inv { color: #333333; } */
+	/* .color-title { color: #eecc00; } */
+	/* .color-title-sec { color: #eedd88; } */
+	/* .color-bg { color: #222222; } */
+	/* .color-border { color: #aaaaaa; } */
+	/* .color-shadow { color: #666666; } */
 	body {
 		font-family: 'Lato', sans-serif;
-		background-color: #202020;
+		background-color: #222222;
 		color: #eeeeee;
-		line-height: 1.54;
+		line-height: 1.5;
 	}
-	a {
-		color: #ece17a;
+	.slide a, .slide em {
+		color: #eedd88;
+	}
+	/* Center images (useful in case there are several) */
+	.slide img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.slide kbd, .slide blockquote  {
+		background-color: #eeeeee;
+		border-radius: 3px;
+		border: 1px solid #aaaaaa;
+		color: #333333;
+		font-weight: 700;
+		padding: 2px 5px;
+		white-space: nowrap;
 	}
 	.slide h2 {
 		font-family: 'Oswald', sans-serif;
 		font-weight: 200;
 		font-size: 1.5rem;
-		color: #ece17a;
+		color: #eedd88;
 	}
 	.slide h1 {
 		font-family: 'Oswald', sans-serif;
 		font-weight: 400;  /* 400 = normal */
 		font-size: 1.8rem;
-		color: #edd400;
+		color: #eecc00;
 	}
-	.slide pre, .slide samp {
+	.slide h2 a.link-anchor:hover {
+		color: #eedd88;
+	}
+	.slide h1 a.link-anchor:hover {
+		color: #eecc00;
+	}
+	.slide h2 a.link-anchor, .slide h1 a.link-anchor {
+		color: #222222;
+		text-decoration: none;
+	}
+	.slide pre, .slide samp, .slide kbd {
 		font-family: 'Inconsolata', monospace;
-		font-size: 0.6rem;
-		line-height: 1.1;
+		/* font-size: 0.9rem; */
+		line-height: 1.2;
 	}
-	/* samp elements are similar to code/pre, but often used to present program output  */
+	/* "solution"-class slides use <pre> for code, but in the color of the bg to hide the solution initially */
+	.slide.solution pre {
+		color: #222222;
+	}
+	/* samp elements are similar to code/pre, but often used to present program output */
 	.slide samp {
-		color: #edd400;
+		color: #eedd88;
 	}
-	/* Optional: samp elements are preceded by a special symbol  */
-	/* .slide samp::before {
-		content: "⇨ ";
-	} */
-	.noselect { /* Disable text selection: https://stackoverflow.com/questions/16805684/javascript-disable-text-select/16805743 */
+	.slide.noselect { /* Disable text selection: https://stackoverflow.com/questions/16805684/javascript-disable-text-select/16805743 */
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;
 		-khtml-user-select: none;
@@ -43,18 +75,18 @@
 		-ms-user-select: none;
 		user-select: none;
 	}
-	ul {
+	.slide ul {
 		margin-left:1em;
 	}
 	/* Customize initial slide: bigger title, and swapped fore and background colors for impact. */
-	.slide.maintitle { color: #333333; background-color: #edd400; }
-	.slide.maintitle h1 { color: #333333; font-size: 2.6rem; }
-	.slide.maintitle h2 { color: #333333; }
-	.slide.maintitle a { color: #333333; text-shadow: 0px 0px 5px #949494; }
+	.slide.maintitle { background-color: #eecc00; color: #333333; }
+	.slide.maintitle h1 { color: #eeeeee; font-size: 2.4rem; text-shadow: 1px 1px 3px #666666; }
+	.slide.maintitle h2 { color: #333333; text-shadow: 1px 1px 3px #666666; }
+	.slide.maintitle a { color: #333333; text-shadow: 0px 0px 5px #666666; }
+	.slide.maintitle em, .slide.maintitle samp { color: #333333; }
 	/* Customize specific slides: special colors or style, backgrounds, etc. Needs to be adapted for each specific presentation. */
-	.slide-10 h1 { color: #f5e65e; text-shadow: 1px 1px 3px #dab200; }  /* Make sure the number in "slide-10" is correct! */
+	.slide-10 h1 { color: #ffbb55; text-shadow: 1px 1px 3px #ffbb55; }  /* Make sure the number in "slide-10" is correct! */
 	.slide.css-backgrounds {
-		color: #333333;
 		background: url("img/test.png"), url("img/background.png");
 		background-repeat: no-repeat, repeat;
 		background-size: 25%, auto;
@@ -67,5 +99,12 @@
 		background-repeat: no-repeat;
 		background-size: 30%, 30%, 30%;
 		background-position: bottom left, bottom center, bottom right;
+	}
+}
+
+@media print {
+	body {
+		background-color: #ffffff;
+		color: #000000;
 	}
 }

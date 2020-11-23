@@ -21,7 +21,7 @@ The improved version that this one is based on can be found [here](https://githu
 3. Find the line `<pre id="slide">` (should be somewhere around line 16).
 4. Edit the text. This is the contents of your presentation.
 5. Edit the `customization.css` (the style settings for your presentation) to delete the example CSS
-styles customizations for specific slides (lines 55 to 70), and optionally adjust colors, etc.
+styles customizations for specific slides (lines 88 to 101), and optionally adjust colors, etc.
 Note that using specific slide customization makes sharing the `customization.css` file for several
 HTML presentations difficult (in that case, it is better to use a *`samefilename.html.css`* file
 -same name as the HTML file, adding `.css`-, which will also be read and used; you can keep the
@@ -99,6 +99,14 @@ code-block lines, but NOT in headings, images, URL's, lists...), to avoid the li
 
 You can print your presentation, in this case the slides will be printed as small thumbnails
 so that you could make notes on paper or use it as a story plan for your speech.
+
+## Search
+
+You can search inside your presentation's content, also with the slides shown as small thumbnails
+so that you can navigate through all occurrences. To do so, press <kbd>Ctrl+F</kbd> (or the equivalent
+key combination in your browser/O.S.) and then start typing the text to search for.
+
+NOTE: you will need to reload the presentation after searching, to return to "normal" view mode.
 
 ## Development and tuning
 
