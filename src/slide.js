@@ -1,9 +1,9 @@
 /* This file is only used during the build process; its content is inserted in the html file */
 
 /* Disable the previous advance-on-click behaviour */
-/* NOTE: change below to CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
+/* NOTE: use CLICK_NEXT=1 to restore the default advance-on-click behaviour... */
 var CLICK_NEXT = 0;
-/* NOTE: change below to HISTORY=0 to avoid pushing browser history elements for each page change! */
+/* NOTE: use HISTORY=0 to avoid pushing browser history elements for each page change! */
 var HISTORY = 1;
 var slideNames = {};
 var currentSlide = -1;

@@ -20,7 +20,7 @@
   "devDependencies": {
     "cssmin": "^0.4.3",
     "jshint": "^2.9.2",
-    "uglify-js": "^2.8.29"
+    "terser": "^3.16.1"
   },
   "dependencies": {
     "beautify": "0.0.8"
