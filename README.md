@@ -80,7 +80,7 @@ other special HTML or embedded content).
 slide's relative scaling. Note that the "zoom factor" applied here is not direclty visible in the
 final result, i.e. 200 makes content a bit bigger but not double-sized. Experiment to get suitable
 values (this should behave similarly to a browser's zoom level).
-- `@CLASS@` **followed by** space(s) and a **short-alfanum-identifier** to define the class name
+- `@CLASS@` **followed by** space(s) and a **short-alfanumeric-identifier** to define the class name
 for a specific slide (useful for defining styles in the CSS without using slide numbers, which
 could change more easily; see demo). It can also be used for direct URL links (ending with
 `#identifier`) to a specific slide (try adding `#format` at the address bar in the demo).
@@ -117,10 +117,10 @@ HTML file from the text file specified, using `slide.html` as a template.
 ### Tuning configurable behaviour
 
 - Change the value of CLICK_NEXT to 1 at the beginning of `slide.js` (or inside the equivalent
-`<script>` tag, if the JS code is embedded in the HTML file>) to restore the original (trikita's)
+`<script>` tag, if the JavaScript code is embedded in the HTML file>) to restore the original (trikita's)
 advance-on-click behaviour.
 - Change the value of HISTORY to 0 at the same place to avoid pushing browser history elements
-for each page change. Side-effect: when refreshin the page, the current slide could change.
+for each page change. Side-effect: when refreshing the page, the current slide could change.
 
 ## License
 
