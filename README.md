@@ -6,6 +6,11 @@ This version is a standalone HTML page, less than 10KB in size, that you can edi
 a working presentation. No other tools needed except for a text editor.
 No programming knowledge is required, too.
 
+The font size of each slide is scaled automatically to fit the screen. This is
+suitable for [Takahashi method](https://en.wikipedia.org/wiki/Takahashi_method).
+
+## Credits
+
 The original ([Trikita](http://trikita.co)) implementation can be found [here](https://github.com/trikita/slide-html).
 An old (2016) Android implementation can be found [here](https://github.com/trikita/slide).
 
@@ -15,6 +20,13 @@ The improved version that this one is based on can be found [here](https://githu
 
 Either open `slide.html` in your browser or [view it online](https://pachi-belero.github.io/slide-html/slide.html).
 
+Usage (see tuning section at the end for more advanced behaviour):
+
+- Go to the next slide with the mouse wheel, Space, Enter, PgDn, l, j, or the right or down arrows.
+- Go to the previous slide with the mouse wheel, Backspace, PgUp, h, k, or the left or up arrows.
+- Go to the first slide with Home.
+- Use Esc to make sure that the navigation bar address is updated with the current slide number.
+
 ## Tutorial
 
 1. Download `slide.html` and `customization.css`.
@@ -22,10 +34,10 @@ Either open `slide.html` in your browser or [view it online](https://pachi-beler
  and press <kbd>Ctrl+S</kbd>, then do the same with
  [this link](https://raw.githubusercontent.com/pachi-belero/slide-html/master/customization.css).
 2. Open the downloaded `slide.html` with a text editor.
-3. Find the line `<pre id="slide">` (should be somewhere around line 16).
+3. Find the line `<pre id="slide">` (should be somewhere around line 21).
 4. Edit the text. This is the contents of your presentation.
 5. Edit the `customization.css` (the style settings for your presentation) to delete the example CSS
-styles customizations for specific slides (lines 88 to 101), and optionally adjust colors, etc.
+styles customizations for specific slides (lines 88 to 94), and optionally adjust colors, etc.
 Note that using specific slide customization makes sharing the `customization.css` file for several
 HTML presentations difficult (in that case, it is better to use a *`samefilename.html.css`* file
 -same name as the HTML file, adding `.css`-, which will also be read and used; you can keep the
@@ -41,9 +53,6 @@ files you have used (if any).
 
 Slides are separated with one (or several consecutive) blank line(s). A blank line is one which is
 completely empty, or has just the same indent as the first of all lines (tabs OR spaces, not mixed).
-
-The font size of each slide is scaled automatically to fit the screen. This is
-suitable for [Takahashi method](https://en.wikipedia.org/wiki/Takahashi_method).
 
 Headlines use a larger font size and start with `#` sign. `##` creates second-level headlines.
 
@@ -120,7 +129,7 @@ HTML file from the text file specified, using `slide.html` as a template.
 `<script>` tag, if the JavaScript code is embedded in the HTML file>) to restore the original (trikita's)
 advance-on-click behaviour.
 - Change the value of HISTORY to 0 at the same place to avoid pushing browser history elements
-for each page change. Side-effect: when refreshing the page, the current slide could change.
+for each page change (use the Esc key to force a history change when desired). Side-effect: when refreshing the page, the current slide could change.
 
 ## License
 
