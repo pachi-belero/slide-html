@@ -92,14 +92,6 @@
 		background-size: 25%, auto;
 		background-position: bottom right;
 	}
-	.slide.android .slide-content {
-		background-image: url("http://trikita.co/slide/write_framed.png"),
-		url("http://trikita.co/slide/styles.gif"),
-		url("http://trikita.co/slide/illustrate_framed.png");
-		background-repeat: no-repeat;
-		background-size: 30%, 30%, 30%;
-		background-position: bottom left, bottom center, bottom right;
-	}
 }
 
 @media print {

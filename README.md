@@ -6,10 +6,14 @@ This version is a standalone HTML page, less than 10KB in size, that you can edi
 a working presentation. No other tools needed except for a text editor.
 No programming knowledge is required, too.
 
-The original (trikita) implementation can be found [here](https://github.com/trikita/slide-html).
-Android implementation (2016) can be found [here](https://github.com/trikita/slide).
+The original ([Trikita](http://trikita.co)) implementation can be found [here](https://github.com/trikita/slide-html).
+An old (2016) Android implementation can be found [here](https://github.com/trikita/slide).
 
 The improved version that this one is based on can be found [here](https://github.com/jloow/slide-html).
+
+## Demo
+
+Either open `slide.html` in your browser or [view it online](https://pachi-belero.github.io/slide-html/slide.html).
 
 ## Tutorial
 
@@ -32,13 +36,6 @@ save and refresh the browser to see how your presentation looks like.
 7. Copy, share and/or publish BOTH the HTML and CSS files whenever needed, and also the local image
 files you have used (if any).
 8. Optionally, you can place a `favicon.ico` file too (in the same folder) and it will be used.
-
-## Demo
-
-Either open `slide.html` in your browser or [view it online](http://htmlpreview.github.io/?https://github.com/pachi-belero/slide-html/blob/master/src/slide.html).
-
-NOTE: the images will not work if you view the file online with the previous link, but they will on
-your local computer or any other HTTP server.
 
 ## Syntax
 
@@ -83,10 +80,10 @@ other special HTML or embedded content).
 slide's relative scaling. Note that the "zoom factor" applied here is not direclty visible in the
 final result, i.e. 200 makes content a bit bigger but not double-sized. Experiment to get suitable
 values (this should behave similarly to a browser's zoom level).
-- `@CLASS@` **followed by** space(s) and an **short-alfanum-identifier** to define the class name
+- `@CLASS@` **followed by** space(s) and a **short-alfanum-identifier** to define the class name
 for a specific slide (useful for defining styles in the CSS without using slide numbers, which
 could change more easily; see demo). It can also be used for direct URL links (ending with
-`#identifier`) to a specific slide (try adding `#android` at the address bar in the demo).
+`#identifier`) to a specific slide (try adding `#format` at the address bar in the demo).
 
 These marks should appear as-is (uppercase), at the **beginning** of a line (one mark per line),
 and with no other content (those lines will be filtered out in the final slide rendered), at any
@@ -117,7 +114,7 @@ or run `npm run build` to generate the standalone `slide.html` version.
 Also, you can run `npm run convert input_text_file output_slide_file.html` to generate a new
 HTML file from the text file specified, using `slide.html` as a template.
 
-**Tuning configurable behaviour**
+### Tuning configurable behaviour
 
 - Change the value of CLICK_NEXT to 1 at the beginning of `slide.js` (or inside the equivalent
 `<script>` tag, if the JS code is embedded in the HTML file>) to restore the original (trikita's)
@@ -128,5 +125,3 @@ for each page change. Side-effect: when refreshin the page, the current slide co
 ## License
 
 Code is distributed under MIT license, feel free to use it.
-
-Made by [Trikita](http://trikita.co) - feel free to checkout our other works!
